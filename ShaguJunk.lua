@@ -79,3 +79,52 @@ do -- config
     end
   end
 end
+
+do -- autovendor
+  local autovendor = CreateFrame("Frame")
+  autovendor:Hide()
+
+  autovendor:RegisterEvent("MERCHANT_SHOW")
+  autovendor:RegisterEvent("MERCHANT_CLOSED")
+  autovendor:SetScript("OnEvent", function()
+    if event == "MERCHANT_CLOSED" then
+      autovendor.merchant = nil
+      autovendor:Hide()
+    elseif event == "MERCHANT_SHOW" then
+      autovendor.merchant = true
+      autovendor:Show()
+    end
+  end)
+
+  autovendor:SetScript("OnUpdate", function()
+    -- throttle to to one item per .1 second
+    if ( this.tick or 1) > GetTime() then return else this.tick = GetTime() + .1 end
+
+    -- iterate through bag
+    for bag = 0, 4, 1 do
+      for slot = 1, GetContainerNumSlots(bag), 1 do
+        local rawlink = GetContainerItemLink(bag, slot)
+        local _, _, link = string.find((rawlink or ""), "(item:%d+:%d+:%d+:%d+)")
+        local name = link and string.lower(GetItemInfo(link))
+
+        if name then
+          for i, vendor in pairs(ShaguJunk_vendor) do
+            -- abort if the merchant window disappeared
+            if not this.merchant then return end
+
+            if name == vendor then
+              -- clear cursor and sell the item
+              ClearCursor()
+              UseContainerItem(bag, slot)
+              -- continue next update
+              return
+            end
+          end
+        end
+      end
+    end
+
+    -- stop processing
+    this:Hide()
+  end)
+end
