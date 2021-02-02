@@ -128,3 +128,43 @@ do -- autovendor
     this:Hide()
   end)
 end
+
+do -- autodelete
+  local autodelete = CreateFrame("Frame")
+  autodelete:Hide()
+
+  autodelete:RegisterEvent("ITEM_PUSH")
+  autodelete:SetScript("OnEvent", function()
+    autodelete:Show()
+  end)
+
+  autodelete:SetScript("OnUpdate", function()
+    -- throttle to to one item per .1 second
+    if ( this.tick or 1) > GetTime() then return else this.tick = GetTime() + .1 end
+
+    -- iterate through bag
+    for bag = 0, 4, 1 do
+      for slot = 1, GetContainerNumSlots(bag), 1 do
+        local rawlink = GetContainerItemLink(bag, slot)
+        local _, _, link = string.find((rawlink or ""), "(item:%d+:%d+:%d+:%d+)")
+        local name = link and string.lower(GetItemInfo(link))
+
+        if name then
+          for i, vendor in pairs(ShaguJunk_delete) do
+            if name == vendor then
+              -- clear cursor and delete the item
+              ClearCursor()
+              PickupContainerItem(bag, slot)
+              DeleteCursorItem()
+              -- continue next update
+              return
+            end
+          end
+        end
+      end
+    end
+
+    -- stop processing
+    this:Hide()
+  end)
+end
