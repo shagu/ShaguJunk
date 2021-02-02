@@ -1,0 +1,7 @@
+## Interface: 20400
+## Title: |cff33ffccShagu|cffffffffJunk
+## Author: Shagu
+## Notes: Automatically deletes or vendors specified items
+## Version: 1.0
+## SavedVariablesPerCharacter: ShaguJunk_vendor, ShaguJunk_delete
+ShaguJunk.lua
