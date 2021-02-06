@@ -72,7 +72,7 @@ do -- config
       end
     else
       DEFAULT_CHAT_FRAME:AddMessage("ShaguJunk Usage:")
-      DEFAULT_CHAT_FRAME:AddMessage("|cffaaffdd/sjunk vendor Fel Iron Ring|cffaaaaaa - |rAutomatically vendors Fel Iron Rings")
+      DEFAULT_CHAT_FRAME:AddMessage("|cffaaffdd/sjunk vendor Fel Iron Blood Ring|cffaaaaaa - |rAutomatically vendors Fel Iron Rings")
       DEFAULT_CHAT_FRAME:AddMessage("|cffaaffdd/sjunk delete Light Hide|cffaaaaaa - |rAutomatically deletes Light Hide")
       DEFAULT_CHAT_FRAME:AddMessage("|cffaaffdd/sjunk rm 3|cffaaaaaa - |rRemoves entry '3' of your list")
       DEFAULT_CHAT_FRAME:AddMessage("|cffaaffdd/sjunk ls|cffaaaaaa - |rDisplays your current list")
