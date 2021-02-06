@@ -13,6 +13,8 @@ that is shown in `/junk ls`.
 
 If the `/junk` command is already occupied by another addon, the `/sjunk` command can be used.
 
+![preview](junk-vendor-ls-rm.gif)
+
 **WARNING: USE AT YOUR OWN RISK**
 
 ## Installation (Vanilla, 1.12)
