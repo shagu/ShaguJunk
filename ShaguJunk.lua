@@ -4,7 +4,7 @@ do -- config
   ShaguJunk_vendor = ShaguJunk_vendor or {}
   ShaguJunk_delete = ShaguJunk_delete or {}
 
-  SLASH_SHAGUJUNK1, SLASH_SHAGUJUNK2 = "/sjunk", "/junk"
+  SLASH_SHAGUJUNK1, SLASH_SHAGUJUNK2, SLASH_SHAGUJUNK3 = "/sjunk", "/junk", "/sj"
   SlashCmdList["SHAGUJUNK"] = function(message)
     local commandlist = { }
     local command
