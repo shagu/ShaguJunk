@@ -28,7 +28,7 @@ do -- config
       DEFAULT_CHAT_FRAME:AddMessage("=> adding |cff33ffcc".. addstring .."|r to your vendor list")
 
     -- add delete entry
-  elseif commandlist[1] == "delete" then
+    elseif commandlist[1] == "delete" then
       local addstring = table.concat(commandlist," ",2)
       if addstring == "" then return end
 
@@ -61,6 +61,7 @@ do -- config
         table.remove(ShaguJunk_delete, delete)
       end
     elseif commandlist[1] == "ls" then
+      local printID = 0
       DEFAULT_CHAT_FRAME:AddMessage("|cff33ee33Vendor Items:")
       for id, hl in pairs(ShaguJunk_vendor) do
         DEFAULT_CHAT_FRAME:AddMessage(" |r[|cff33ee33"..id.."|r] "..hl)
