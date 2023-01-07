@@ -56,20 +56,24 @@ do -- config
       elseif ShaguJunk_delete[delete] then
         DEFAULT_CHAT_FRAME:AddMessage("=> Removing entry " .. commandlist[2]
           .. " (" .. ShaguJunk_delete[delete]
-          .. ") from your deletion list")
-
+          .. ") from your deletion list") 
         table.remove(ShaguJunk_delete, delete)
       end
     elseif commandlist[1] == "ls" then
+      local addstring = table.concat(commandlist," ",2)
       local printID = 0
       DEFAULT_CHAT_FRAME:AddMessage("|cff33ee33Vendor Items:")
       for id, hl in pairs(ShaguJunk_vendor) do
-        DEFAULT_CHAT_FRAME:AddMessage(" |r[|cff33ee33"..id.."|r] "..hl)
+        if string.find(hl, addstring) then
+          DEFAULT_CHAT_FRAME:AddMessage(" |r[|cff33ee33"..id.."|r] "..hl)
+        end
         printID = id
       end
       DEFAULT_CHAT_FRAME:AddMessage("|cffaa3333Delete Items:")
       for id, hl in pairs(ShaguJunk_delete) do
-        DEFAULT_CHAT_FRAME:AddMessage(" |r[|cffee3333"..id+printID.."|r] "..hl)
+        if string.find(hl, addstring) then
+          DEFAULT_CHAT_FRAME:AddMessage(" |r[|cffee3333"..id+printID.."|r] "..hl)
+        end
       end
     else
       DEFAULT_CHAT_FRAME:AddMessage("ShaguJunk Usage:")
@@ -77,6 +81,7 @@ do -- config
       DEFAULT_CHAT_FRAME:AddMessage("|cffaaffdd/sjunk delete Light Hide|cffaaaaaa - |rAutomatically deletes Light Hide")
       DEFAULT_CHAT_FRAME:AddMessage("|cffaaffdd/sjunk rm 3|cffaaaaaa - |rRemoves entry '3' of your list")
       DEFAULT_CHAT_FRAME:AddMessage("|cffaaffdd/sjunk ls|cffaaaaaa - |rDisplays your current list")
+      DEFAULT_CHAT_FRAME:AddMessage("|cffaaffdd/sjunk ls <text>|cffaaaaaa - |rSearch your current list for text")
     end
   end
 end
