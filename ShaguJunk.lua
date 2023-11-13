@@ -56,7 +56,7 @@ do -- config
       elseif ShaguJunk_delete[delete] then
         DEFAULT_CHAT_FRAME:AddMessage("=> Removing entry " .. commandlist[2]
           .. " (" .. ShaguJunk_delete[delete]
-          .. ") from your deletion list") 
+          .. ") from your deletion list")
         table.remove(ShaguJunk_delete, delete)
       end
     elseif commandlist[1] == "ls" then
@@ -153,7 +153,8 @@ do -- autodelete
       for slot = 1, GetContainerNumSlots(bag), 1 do
         local rawlink = GetContainerItemLink(bag, slot)
         local _, _, link = string.find((rawlink or ""), "(item:%d+:%d+:%d+:%d+)")
-        local name = link and string.lower(GetItemInfo(link))
+        local name = link and GetItemInfo(link)
+        name = name and string.lower(name)
 
         if name then
           for i, vendor in pairs(ShaguJunk_delete) do
