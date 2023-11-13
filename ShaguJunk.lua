@@ -111,7 +111,8 @@ do -- autovendor
       for slot = 1, GetContainerNumSlots(bag), 1 do
         local rawlink = GetContainerItemLink(bag, slot)
         local _, _, link = string.find((rawlink or ""), "(item:%d+:%d+:%d+:%d+)")
-        local name = link and string.lower(GetItemInfo(link))
+        local name = link and GetItemInfo(link)
+        name = name and string.lower(name)
 
         if name then
           for i, vendor in pairs(ShaguJunk_vendor) do
